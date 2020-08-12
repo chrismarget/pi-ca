@@ -1,1 +1,2 @@
 /usr/lib/raspi-config/init_resize.sh
+/lib/udev/hwclock-set
