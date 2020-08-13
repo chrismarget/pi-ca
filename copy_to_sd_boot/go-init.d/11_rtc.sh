@@ -9,5 +9,6 @@
 
 rm /etc/systemd/system/sysinit.target.wants/fake-hwclock.service
 mv /etc/rcS.d/S01fake-hwclock /etc/rcS.d/K01fake-hwclock
+rm /etc/cron.hourly/fake-hwclock
 echo "dtoverlay=i2c-rtc,ds3231" >> /boot/config.txt
 echo "i2c_dev" >> /etc/modules
