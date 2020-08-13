@@ -1,7 +1,7 @@
 #!/bin/bash
 
 error() {
-  echo "error: $1"
+  >&2 echo "error: $1"
   exit 1
 }
 
@@ -37,6 +37,7 @@ wait_for_mount () {
     sleep .1
     ((tries=$tries-1))
   done
+  [ $tries -eq 0 ] && >&2 echo "wait_for_mount $1 timed out"
   [ $tries -eq 0 ] && return 1
   return 0
 }
@@ -107,7 +108,7 @@ do_checksum () {
   esac
   
   SUM=$(cut -d ' ' -f 1 $SUM_FILE)
-  echo doing checksum $IMG_FILE $SUM_FILE
+  >&2 echo doing checksum $IMG_FILE $SUM_FILE
   echo "$SUM  $IMG_FILE" | shasum -a $alg -c -
   return $?
 }
