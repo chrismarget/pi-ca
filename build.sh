@@ -232,17 +232,14 @@ add_partitions () {
   # Save the MBR ID because OSX fdisk will zero it
   MBR_ID=$(dd if=$RAWDEV bs=1 skip=440 count=4)
   
-  # repartition, fix the MBR ID
+  # repartition
   diskutil umountDisk force $RAWDEV
   echo ${PARTS[*]} | tr ' ' '\n' | fdisk -yr $RAWDEV
-
-  # going to happen anyway, avoid the race condition
   wait_for_mount ${RAWDEV}s1 || error "partition 1 didn't re-mount after call to fdisk"
 
+  # fix MBR ID
   diskutil umountDisk force $RAWDEV
   echo -n $MBR_ID | sudo dd of=$RAWDEV bs=1 seek=440
-
-  # going to happen anyway, avoid the race condition
   wait_for_mount ${RAWDEV}s1 || error "partition 1 didn't re-mount after fixing MBR ID"
 
   diskutil umountDisk force $RAWDEV
