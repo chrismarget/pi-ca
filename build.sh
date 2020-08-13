@@ -188,7 +188,7 @@ get_yes_no () {
 
 write_image () {
   diskutil umountDisk force $2
-  unzip -p $1 | dd obs=512k of=$2
+  unzip -p $1 | dd ibs=512 obs=512k of=$2
   return $?
 }
 
