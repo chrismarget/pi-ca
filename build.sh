@@ -235,10 +235,16 @@ add_partitions () {
   # repartition, fix the MBR ID
   diskutil umountDisk force $RAWDEV
   echo ${PARTS[*]} | tr ' ' '\n' | fdisk -yr $RAWDEV
-  wait_for_mount ${RAWDEV}s1 # going to happen anyway, avoid the race condition
+
+  # going to happen anyway, avoid the race condition
+  wait_for_mount ${RAWDEV}s1 || error "partition 1 didn't re-mount after call to fdisk"
+
   diskutil umountDisk force $RAWDEV
   echo -n $MBR_ID | sudo dd of=$RAWDEV bs=1 seek=440
-  wait_for_mount ${RAWDEV}s1 # going to happen anyway, avoid the race condition
+
+  # going to happen anyway, avoid the race condition
+  wait_for_mount ${RAWDEV}s1 || error "partition 1 didn't re-mount after fixing MBR ID"
+
   diskutil umountDisk force $RAWDEV
 }
 
