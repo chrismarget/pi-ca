@@ -10,4 +10,3 @@
 rm /etc/systemd/system/sysinit.target.wants/fake-hwclock.service
 mv /etc/rcS.d/S01fake-hwclock /etc/rcS.d/K01fake-hwclock
 echo "dtoverlay=i2c-rtc,ds3231" >> /boot/config.txt
-patch /lib/udev/hwclock-set < $(dirname $0)/patch.d/hwclock-set.patch
