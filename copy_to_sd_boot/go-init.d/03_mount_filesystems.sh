@@ -45,6 +45,7 @@ do
   echo "$FSTAB" >> /etc/fstab
 done
 
+[ -f /boot/sync ] && sed -i 's/^\(PARTUUID.*defaults\)/\1,sync/' /etc/fstab
 
 umount /dev
 umount /proc
