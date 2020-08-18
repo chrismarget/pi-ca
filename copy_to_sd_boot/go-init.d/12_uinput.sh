@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "uinput" >> /etc/modules.d
+echo "uinput" >> /etc/modules
