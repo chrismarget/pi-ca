@@ -136,7 +136,7 @@ get_device_name () {
 
     if [ ${#DISKS[@]} -eq 0 ]
     then
-      error "Cannot find disks"
+      error "Cannot find any SD cards"
     fi
 
     if [ ${#DISKS[@]} -gt 1 ]
