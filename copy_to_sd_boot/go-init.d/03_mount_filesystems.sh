@@ -3,6 +3,8 @@
 mount -t proc proc /proc
 mount -t sysfs sys /sys
 mount -t devtmpfs devtmpfs /dev
+mkdir /dev/pts
+mount -t devpts devpts /dev/pts
 
 ROOT_PART_DEV=$(findmnt / -o source -n)
 ROOT_PART_NAME=$(echo "$ROOT_PART_DEV" | awk -F '/' '{print $NF}')
@@ -47,6 +49,7 @@ done
 
 [ -f /boot/sync ] && sed -i 's/^\(PARTUUID.*defaults\)/\1,sync/' /etc/fstab
 
-umount /dev
-umount /proc
-umount /sys
+#umount /dev/pts
+#umount /dev
+#umount /proc
+#umount /sys
