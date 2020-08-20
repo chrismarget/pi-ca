@@ -14,15 +14,16 @@ hash_and_link+=('433ea288737fcc5a7bbe1e57342595cf9a278f14 http://archive.raspbia
 [ -n "$PROJECT_DIR" ] || error "PROJECT_DIR unset"
 [ -n "$P3_MNT" ] || error "P3_MNT unset"
 [ -d "$P3_MNT" ] || error "partition 3 should be mounted, but isn't"
+[ -n "$P3_LABEL" ] || error "P3_LABEL unset"
 [ -n "$BOOT_MNT" ] || error "BOOT_MNT unset"
 [ -d "$BOOT_MNT" ] || error "/boot partition should be mounted, but isn't"
 
 cache_dir="${PROJECT_DIR}/.build.cache"
 mkdir -p "$cache_dir"
 
-dst_dir=$P3_MNT/pkgs
-mkdir -p $dst_dir
-
+pkg_dir="pkgs"
+build_pkg_dir="${P3_MNT}/$pkg_dir"
+mkdir -p $build_pkg_dir
 
 i=0
 while [ $i -lt ${#hash_and_link[@]} ]
@@ -32,6 +33,15 @@ do
   file="${cache_dir}/$(basename $link)"
   [ -f "$file" ] || (echo -e "\nFeching $link..."; curl -o "$file" "$link")
   echo -n "Checking $file... "
-  shasum -c - <<< "$hash  $file" && cp $file $dst_dir
+  shasum -c - <<< "$hash  $file" && cp $file $build_pkg_dir
   i=$((i+1))
 done
+
+if [ $i -gt 0 ]
+then
+  pi_pkg_mp="/opt/${P3_LABEL}"
+  pi_pkg_dir="${pi_pkg_mp}/$pkg_dir"
+  cmdline=${BOOT_MNT}/cmdline.txt
+  sed -i .bak "1s:$: pkg_mp=$pi_pkg_mp:" $cmdline && rm ${cmdline}.bak
+  sed -i .bak "1s:$: pkg_dir=$pi_pkg_dir:" $cmdline && rm ${cmdline}.bak
+fi
