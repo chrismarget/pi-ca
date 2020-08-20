@@ -263,8 +263,8 @@ mkfs () {
 do_run_parts () {
   export PROJECT_DIR=$(dirname $0)
   export BOOT_MNT
-  [ $P3SIZE -gt 0 ] && export P3_MNT=$(get_mount_point ${BLK_DEV}s3)
-  [ $P4SIZE -gt 0 ] && export P4_MNT=$(get_mount_point ${BLK_DEV}s4)
+  [ $P3SIZE -gt 0 ] && export P3_MNT=$(get_mount_point ${BLK_DEV}s3) && export P3_LABEL=$P3LABEL
+  [ $P4SIZE -gt 0 ] && export P4_MNT=$(get_mount_point ${BLK_DEV}s4) && export P4_LABEL=$P4LABEL
 
   for i in ${1}/*sh
   do
@@ -322,6 +322,7 @@ main () {
   GOOS=linux GOARCH=arm GOARM=5 go build -i -o ${DIR}/go-init go-init/main.go
 
   # run the post-build modules
+  echo "Running scripts in $(dirname $0)/build.d/"
   do_run_parts $(dirname $0)/build.d
 }
 
