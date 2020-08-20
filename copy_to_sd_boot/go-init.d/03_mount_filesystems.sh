@@ -47,8 +47,12 @@ do
   echo "$FSTAB" >> /etc/fstab
 done
 
-[ -f /boot/sync ] && sed -i 's/^\(PARTUUID.*defaults\)/\1,sync/' /etc/fstab
+if [ -f /boot/sync ]
+then
+  sed -i 's/^\(PARTUUID.*defaults\)/\1,sync/' /etc/fstab
+fi
 
+# these are needed by other scripts, 99_unmount_filesystems.sh covers this now
 #umount /dev/pts
 #umount /dev
 #umount /proc
