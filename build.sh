@@ -262,12 +262,13 @@ mkfs () {
 
 do_run_parts () {
   export PROJECT_DIR=$(dirname $0)
-  export BOOT_MNT
+  export BOOT_MNT=$(get_mount_point ${BLK_DEV}s1)
   [ $P3SIZE -gt 0 ] && export P3_MNT=$(get_mount_point ${BLK_DEV}s3) && export P3_LABEL=$P3LABEL
   [ $P4SIZE -gt 0 ] && export P4_MNT=$(get_mount_point ${BLK_DEV}s4) && export P4_LABEL=$P4LABEL
 
   for i in ${1}/*sh
   do
+    echo ${i}...
     [ -e $i ] && $i
   done
 }
@@ -310,12 +311,9 @@ main () {
   [ $P4SIZE -gt 0 ] && mkfs ${RAW_DEV}s4 $P4LABEL
 
   # Remount everything (straggler filesystems)
-  out=$(diskutil umountDisk force $BSD_DEV) || error "$out"
-  diskutil mountDisk $BSD_DEV
-
-  # The /boot filesystem should be automatically mounted by OSX. Find it.
-  BOOT_MNT=$(get_mount_point ${BLK_DEV}s1)
-  [ -n "$BOOT_MNT"  ] || echo "${BLK_DEV}s1 device not mounted after imaging"
+  diskutil mount ${BSD_DEV}s1
+  [ $P3SIZE -gt 0 ] && diskutil mount ${BSD_DEV}s3
+  [ $P4SIZE -gt 0 ] && diskutil mount ${BSD_DEV}s4
 
   # Build the go-init binary
   DIR=$(dirname $0)/copy_to_sd_boot
