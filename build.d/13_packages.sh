@@ -30,7 +30,7 @@ do
   hash="${hash_and_link[i]:0:40}"
   link="${hash_and_link[i]:41}"
   file="${cache_dir}/$(basename $link)"
-  [ -f "$file" ] || curl -o "$file" "$link"
-  shasum -c - <<< "$sum  $file" && cp $file $dst_dir
+  [ -f "$file" ] || (echo feching $link...; curl -o "$file" "$link")
+  shasum -c - <<< "$hash  $file" && cp $file $dst_dir
   i=$((i+1))
 done
