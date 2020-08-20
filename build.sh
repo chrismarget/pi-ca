@@ -75,6 +75,8 @@ check_params () {
   [ -z "$IMAGE" ] && error "Raspbian image not specified"
   [ $P3SIZE -eq 0 ] && [ -n "$P3LABEL" ] && error "partition 3 label specified for zero-length filesystem"
   [ $P4SIZE -eq 0 ] && [ -n "$P4LABEL" ] && error "partition 4 label specified for zero-length filesystem"
+  [ $P3SIZE -gt 0 ] && [ -z "$P3LABEL" ] && error "partition 3 size specified with empty label"
+  [ $P4SIZE -gt 0 ] && [ -z "$P4LABEL" ] && error "partition 4 size specified with empty label"
   ([ -z "$P3LABEL" ] || check_dos_8.3 $P3LABEL) || error "label $P3LABEL must be DOS 8.3 format"
   ([ -z "$P4LABEL" ] || check_dos_8.3 $P4LABEL) || error "label $P4LABEL must be DOS 8.3 format"
   [ "$P3LABEL" == "$P4LABEL" ] && [ -n "$P3LABEL" ] && error "don't use the same filesystem label twice"
