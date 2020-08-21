@@ -3,8 +3,6 @@
 mount -t proc proc /proc
 mount -t sysfs sys /sys
 mount -t devtmpfs devtmpfs /dev
-mkdir /dev/pts
-mount -t devpts devpts /dev/pts
 
 ROOT_PART_DEV=$(findmnt / -o source -n)
 ROOT_PART_NAME=$(echo "$ROOT_PART_DEV" | awk -F '/' '{print $NF}')
@@ -52,8 +50,6 @@ then
   sed -i 's/^\(PARTUUID.*defaults\)/\1,sync/' /etc/fstab
 fi
 
-# these are needed by other scripts, 99_unmount_filesystems.sh covers this now
-#umount /dev/pts
-#umount /dev
-#umount /proc
-#umount /sys
+umount /dev
+umount /proc
+umount /sys
