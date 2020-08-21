@@ -41,7 +41,11 @@ if [ $i -gt 0 ]
 then
   pi_pkg_mp="/opt/${P3_LABEL}"
   pi_pkg_dir="${pi_pkg_mp}/$pkg_dir"
-  cmdline=${BOOT_MNT}/cmdline.txt
-  sed -i .bak "1s:$: pkg_mp=$pi_pkg_mp:" $cmdline && rm ${cmdline}.bak
-  sed -i .bak "1s:$: pkg_dir=$pi_pkg_dir:" $cmdline && rm ${cmdline}.bak
+  start_script="${BOOT_MNT}/rc.local.d/01_pkg_install.sh"
+#  cmdline=${BOOT_MNT}/cmdline.txt
+#  sed -i .bak "1s:$: pkg_mp=$pi_pkg_mp:" $cmdline && rm ${cmdline}.bak
+#  sed -i .bak "1s:$: pkg_dir=$pi_pkg_dir:" $cmdline && rm ${cmdline}.bak
+  echo "#!/bin/sh" > $start_script
+  echo "dpkg -i ${pi_pkg_dir}/*" >> $start_script
+  echo "rm \$0" >> $start_script
 fi
