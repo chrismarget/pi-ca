@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-umount /dev/pts
 umount /dev
 umount /proc
 umount /sys
+exit 0
