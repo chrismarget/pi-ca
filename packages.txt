@@ -5,3 +5,4 @@ a07af0fe437c1c76b82320d29bcd7447c42fbd70 http://archive.raspbian.org/raspbian/po
 c0d45518fde6cb9345dbdf321831792fafaeb153 http://archive.raspbian.org/raspbian/pool/main/p/python-uinput/python3-uinput_0.11.2-1+b1_armhf.deb
 bd7c5ea281dd53bdd0c773fb7dbd0ac929241aa4 http://archive.raspbian.org/raspbian/pool/main/u/urwid/python3-urwid_2.0.1-2+b1_armhf.deb
 433ea288737fcc5a7bbe1e57342595cf9a278f14 http://archive.raspbian.org/raspbian/pool/main/p/pyyaml/python3-yaml_3.13-2_armhf.deb
+2f1b1003249b0740d0ca897e4b3f91461db15f73 http://archive.raspbian.org/raspbian/pool/main/p/python-dateutil/python3-dateutil_2.7.3-3_all.deb
