@@ -316,8 +316,9 @@ main () {
   [ $P4SIZE -gt 0 ] && diskutil mount ${BSD_DEV}s4
 
   # Build the go-init binary
-  DIR=$(dirname $0)/copy_to_sd_boot
-  GOOS=linux GOARCH=arm GOARM=5 go build -i -o ${DIR}/go-init go-init/main.go
+  BINDIR="$(cd "$(dirname "$0")"; pwd)/copy_to_sd_boot"
+  mkdir -p $BINDIR
+  (cd go-init; GOOS=linux GOARCH=arm GOARM=5 go build -i -o ${BINDIR}/go-init main.go)
 
   # run the post-build modules
   echo "Running scripts in $(dirname $0)/build.d/"
