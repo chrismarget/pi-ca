@@ -1,2 +1,3 @@
-All files in this directory (exept this file) will be copied to
-partition 1 (`/boot`) on the SD card.
+Project to build a keyhole appliance.
+
+clone this repository with the `--recursive` option to get submodules.
