@@ -6,3 +6,13 @@ c0d45518fde6cb9345dbdf321831792fafaeb153 http://archive.raspbian.org/raspbian/po
 bd7c5ea281dd53bdd0c773fb7dbd0ac929241aa4 http://archive.raspbian.org/raspbian/pool/main/u/urwid/python3-urwid_2.0.1-2+b1_armhf.deb
 433ea288737fcc5a7bbe1e57342595cf9a278f14 http://archive.raspbian.org/raspbian/pool/main/p/pyyaml/python3-yaml_3.13-2_armhf.deb
 2f1b1003249b0740d0ca897e4b3f91461db15f73 http://archive.raspbian.org/raspbian/pool/main/p/python-dateutil/python3-dateutil_2.7.3-3_all.deb
+#
+# needed for git
+ba024e7d7336b6e0ee076e6dad82fc6d5efa6fca  http://archive.raspbian.org/raspbian/pool/main/c/curl/libcurl3-gnutls_7.64.0-4+deb10u1_armhf.deb
+f8010bffed8561ac863280b0a55eca6b730f0f3f  http://archive.raspbian.org/raspbian/pool/main/libe/liberror-perl/liberror-perl_0.17027-2_all.deb
+1149e38dd60c3b64a03b38cc6142989d00a3ac9d  http://archive.raspbian.org/raspbian/pool/main/g/git/git-man_2.20.1-2+deb10u3_all.deb
+927baaa639449dffe132683ba660368a7d625e5c  http://archive.raspbian.org/raspbian/pool/main/g/git/git_2.20.1-2+deb10u3_armhf.deb
+#
+# needed for tcpdump
+efcc93efe8a6e860ae59078ea060ed766d1b2205 http://archive.raspbian.org/raspbian/pool/main/libp/libpcap/libpcap0.8_1.8.1-6_armhf.deb
+55d3866946a6aff80cf7a5533a349d6f68293c83 http://archive.raspbian.org/raspbian/pool/main/t/tcpdump/tcpdump_4.9.3-1~deb10u1_armhf.deb
